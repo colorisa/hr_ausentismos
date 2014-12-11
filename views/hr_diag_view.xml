@@ -1,0 +1,334 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+    	<record id="hr_c3_search_view" model="ir.ui.view">
+            <field name="name">hr.diag.c3.search</field>
+            <field name="model">hr.diag.c3</field>
+            <field name="arch" type="xml">
+                <search string="Categorias">
+                    <field name="code" string="Codigo"/>
+                    <field name="name" string="Diagnostico"/>
+                </search>
+            </field>
+        </record>
+    	
+    	<record id="hr_diag_search_view" model="ir.ui.view">
+            <field name="name">hr.diag.search</field>
+            <field name="model">hr.diag</field>
+            <field name="arch" type="xml">
+                <search string="Diagnosticos">
+                    <field name="code" string="Codigo"/>
+                    <field name="name" string="Diagnostico"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="hr_c3_form_view" model="ir.ui.view">
+            <field name="name">hr.diag.c3.form</field>
+            <field name="model">hr.diag.c3</field>
+            <field name="arch" type="xml">
+                <form string="Categorias">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="code" class="oe_edit_only"/>
+                            <h1>
+                                <field name="code"/>
+                            </h1>
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        
+        <record id="hr_diag_form_view" model="ir.ui.view">
+            <field name="name">hr.diag.form</field>
+            <field name="model">hr.diag</field>
+            <field name="arch" type="xml">
+                <form string="Diagnosticos">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="c3_id" class="oe_edit_only"/>
+                            <h1>
+                                <field name="c3_id"/>
+                            </h1>
+                            <label for="code" class="oe_edit_only"/>
+                            <h1>
+                                <field name="code"/>
+                            </h1>
+                  
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="hr_c3_list_view" model="ir.ui.view">
+            <field name="name">hr.diag.c3.list</field>
+            <field name="model">hr.diag.c3</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="Categorias">
+                    <field name="complete_name"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="hr_diag_list_view" model="ir.ui.view">
+            <field name="name">hr.diag.list</field>
+            <field name="model">hr.diag</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="Diagnosticos">
+                    <field name="c3_id"/>
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="hr_c3_tree_view" model="ir.ui.view">
+            <field name="name">hr.diag.c3.tree</field>
+            <field name="model">hr.diag.c3</field>
+            <field name="field_parent">child_id</field>
+            <field name="arch" type="xml">
+                <tree toolbar="True" string="Categorias">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="hr_diag_tree_view" model="ir.ui.view">
+            <field name="name">hr.diag.tree</field>
+            <field name="model">hr.diag</field>
+            <field name="field_parent">child_id</field>
+            <field name="arch" type="xml">
+                <tree toolbar="True" string="Diagnosticos">
+                    <field name="c3_id"/>
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="hr_c3_action" model="ir.actions.act_window">
+            <field name="name">Categoria de diagnostico</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.diag.c3</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="hr_c3_tree_view"/>
+            <field name="help" type="html">
+              <p>
+                Aqui hay un listado de los diagnosticos clasificados por la categoria.
+              </p>
+            </field>
+        </record>
+        
+        <record id="hr_diag_action" model="ir.actions.act_window">
+            <field name="name">Incapacidades por diganostico</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.diag</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="hr_diag_tree_view"/>
+            <field name="help" type="html">
+              <p>
+                Aqui hay un listado de las incapacidades clasificados por el diagnostico.
+              </p>
+            </field>
+        </record>
+        
+        <menuitem id="menu_hr_ausent" parent="hr.menu_hr_root" name="Ausentismo" sequence="10"/>
+        
+        <menuitem
+            id="menu_hrs_diag"
+            name="Incapacidades"
+            parent="menu_hr_ausent"
+            sequence="30" groups="base.group_no_one"/>
+        
+        <record id="hr_c3_action_form" model="ir.actions.act_window">
+            <field name="name">Categoria Diagnosticos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.diag.c3</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="hr_c3_search_view"/>
+            <field name="view_id" ref="hr_c3_list_view"/>
+        </record>
+        
+        
+        <record id="hr_diag_action_form" model="ir.actions.act_window">
+            <field name="name">Diagnosticos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.diag</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="hr_diag_search_view"/>
+            <field name="view_id" ref="hr_diag_list_view"/>
+        </record>
+        
+        
+        
+        <menuitem action="hr_c3_action_form"
+            groups="base.group_no_one"
+            name="Categoria Diagnosticos"
+            id="menu_hr_c3_action_form"
+            parent="hr.menu_hr_configuration" sequence="3"/>
+                
+        <menuitem action="hr_diag_action_form"
+            groups="base.group_no_one"
+            name="Diagnosticos"
+            id="menu_hr_diag_action_form"
+            parent="hr.menu_hr_configuration" sequence="4"/>
+            
+<!-- Entidades Seguridad Social -->            
+
+<record model="ir.ui.view" id="view_hr_contract_colorisa">
+            <field name="name">hr.contract.view.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+            	<notebook position="inside">
+                	<page string="Seguridad Social">
+                		<group name="seguridad_social">
+                		    <field name="arl_id"/>
+                            <field name="afp_id"/>
+                            <field name="afc_id"/>
+                            <field name="eps_id"/>
+                            <field name="ccf_id"/>
+                        </group>
+                     </page>
+            	</notebook>
+            </field>
+     </record>
+     
+     
+     <record id="hr_entss_search_view" model="ir.ui.view">
+            <field name="name">hr.entss.search</field>
+            <field name="model">hr.entss</field>
+            <field name="arch" type="xml">
+                <search string="Entidad Seguridad Social">
+                    <field name="code" string="Codigo"/>
+                    <field name="entidad" string="Entidad"/>
+                    <field name="tipo" string="Tipo"/>
+                    <field name="codigo_nacional" string="Codigo Nacional"/>
+                </search>
+            </field>
+     </record>
+     
+     <record id="hr_entss_form_view" model="ir.ui.view">
+            <field name="name">hr.entss.form</field>
+            <field name="model">hr.entss</field>
+            <field name="arch" type="xml">
+                <form string="Entidad Seguridad Social">
+                    <sheet>
+                            <label for="code" class="oe_edit_only"/>
+                            <field name="code"/>
+                            <label for="entidad" class="oe_edit_only"/>
+                            <field name="entidad"/>
+                            <label for="tipo" class="oe_edit_only"/>
+                            <field name="tipo"/>
+                            <label for="codigo_nacional" class="oe_edit_only"/>
+                            <field name="codigo_nacional"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="hr_entss_list_view" model="ir.ui.view">
+            <field name="name">hr.entss.list</field>
+            <field name="model">hr.entss</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="Entidad Seguridad Social">
+                    <field name="code"/>
+                    <field name="entidad"/>
+                    <field name="tipo"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="hr_entss_tree_view" model="ir.ui.view">
+            <field name="name">hr.entss.tree</field>
+            <field name="model">hr.entss</field>
+            <field name="field_parent">child_id</field>
+            <field name="arch" type="xml">
+                <tree toolbar="True" string="Entidad Seguridad Social">
+                    <field name="code"/>
+                    <field name="entidad"/>
+                    <field name="tipo"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="hr_entss_action" model="ir.actions.act_window">
+            <field name="name">Entidades de Seguridad Social</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.entss</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="hr_entss_tree_view"/>
+            <field name="help" type="html">
+              <p>
+                Aqui hay un listado de las Entidades de Seguridad Social.
+              </p>
+            </field>
+        </record>
+        
+        <record id="hr_entss_action_form" model="ir.actions.act_window">
+            <field name="name">Entidades de Seguridad SOcial</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.entss</field>
+            <field name="view_type">form</field>
+            <field name="search_view_id" ref="hr_entss_search_view"/>
+            <field name="view_id" ref="hr_entss_list_view"/>
+        </record>
+        
+        <menuitem action="hr_entss_action_form"
+            groups="base.group_no_one"
+            name="Entidades Seguridad Social"
+            id="menu_hr_entss_action_form"
+            parent="hr.menu_hr_configuration" sequence="2"/>
+            
+         <record model="ir.ui.view" id="edit_ausent_holiday_new">
+            <field name="name">Leave Request</field>
+            <field name="model">hr.holidays</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_new" />
+            <field name="arch" type="xml">
+ 				<field name="number_of_days_temp" position="replace">
+            		<field name="number_of_days_temp" class="oe_inline"/> dias -  
+            		<field name="number_of_hours_temp" class="oe_inline"/> horas
+            	</field>
+        	</field>
+        </record>
+        
+        <record id="view_diag_report_graph" model="ir.ui.view">
+                <field name="name">hr.holidays.graph</field>
+                <field name="model">hr.holidays</field>
+                <field name="inherit_id" ref="hr_holidays.view_evaluation_report_graph" />
+                <field name="arch" type="xml">
+                <field name="number_of_days" position="after">
+                    <field name="number_of_hours" type="measure"/>
+                </field>
+             </field>
+        </record>
+        
+        <record id="view_hr_ausent_filter" model="ir.ui.view">
+            <field name="name">hr.holidays.filter</field>
+            <field name="model">hr.holidays</field>
+            <field name="inherit_id" ref="hr_holidays.view_hr_holidays_filter" />
+            <field name="arch" type="xml">
+                <filter name="group_employee" position="after">
+                	<filter name="group_department" string="Departamento" context="{'group_by':'department_id'}"/>
+                </filter>
+            </field>
+        </record>
+        
+    </data>
+</openerp>
+

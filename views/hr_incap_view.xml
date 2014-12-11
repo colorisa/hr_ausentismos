@@ -1,0 +1,186 @@
+<?xml version="1.0" ?>
+<openerp>
+    <data>
+    	<record id="view_incapacidad_report_graph" model="ir.ui.view">
+                <field name="name">hr.incap.graph</field>
+                <field name="model">hr.incap</field>
+                <field name="arch" type="xml">
+                <graph string="Analisis de Incapacidades" type="pivot" stacked="True">
+                    <field name="employee_id" type="row"/>
+                    <field name="ori_incap" type="row"/>
+                    <field name="fecha_ini" type="col"/>
+                    <field name="dias" type="measure"/>
+                 </graph>
+             </field>
+        </record>
+
+        <record id="view_hr_incap_filter" model="ir.ui.view">
+            <field name="name">hr.incap.filter</field>
+            <field name="model">hr.incap</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Incapacidad">
+                    <field name="numero"/>
+                    <separator/>
+                    <filter string="Mis Incapacidades" name="mi_incap" domain="[('empleado.user_id','=', uid)]" help="Mis incapacidades"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_dx" string="Diagnostico" context="{'group_by':'cod_diag'}"/>
+                        <filter name="group_departamento" string="Departamento" context="{'group_by':'department_id'}"/>
+                        <filter name="group_empleado" string="Empleado" context="{'group_by':'employee_id'}"/>
+                        <filter name="group_ori" string="Origen Incapacidad" context="{'group_by':'ori_incap'}"/>
+                        <filter name="group_dia" string="Dia" context="{'group_by':'dia'}"/>
+                        <separator/>
+                        <filter name="group_fecha_ini" string="Fecha" context="{'group_by':'fecha_ini:month'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    	
+    	<record id="hr_incap_search_view" model="ir.ui.view">
+            <field name="name">hr.incap.search</field>
+            <field name="model">hr.incap</field>
+            <field name="arch" type="xml">
+                <search string="Incapacidades">
+                    <field name="numero" string="Numero Incapacidad"/>
+                    <field name="employee_id" string="Empleado"/>
+                    <field name="ori_incap" string="Origen Incapacidad"/>
+                    <field name="fecha_ini" string="Fecha Inicio"/>
+                    <field name="fecha_fin" string="Fecha Finalizacion"/>
+                    <field name="dias" string="Dias otorgados"/>
+                    <field name="dia" string="Dia"/>
+                    <field name="cod_diag" string="Diagnostico"/>
+                    <field name="prorroga" string="Incial/Prorroga"/>
+                </search>
+            </field>
+        </record>
+    	
+    	<record id="hr_incap_form_view" model="ir.ui.view">
+            <field name="name">hr.incap.form</field>
+            <field name="model">hr.incap</field>
+            <field name="arch" type="xml">
+                <form string="Incapacidades">
+                    <sheet>
+                    	    <label for="numero" class="oe_edit_only"/>
+                            <h3>
+                    			<field name="numero" string="Numero Incapacidad"/>
+                    		</h3>
+                    		<label for="employee_id" class="oe_edit_only"/>
+                            <h4>
+                    			<field name="employee_id" string="Empleado"/>
+                   			</h4>
+                   			<label for="department_id" class="oe_edit_only"/>
+                            <h4>
+                    			<field name="department_id" string="Departamento"/>
+                   			</h4>
+                    		<label for="ori_incap" class="oe_edit_only"/>
+                            <h4>
+                    			<field name="ori_incap" string="Origen Incapacidad"/>
+                   			</h4>
+                   			<group col="4">
+                   			<group>
+                   			<label for="fecha_ini" class="oe_edit_only"/>
+                            <h4>
+                    			<field name="fecha_ini" string="Fecha Inicio"/>
+                    		</h4>
+                    		</group>
+                    		<group>
+                    		<label for="fecha_fin" class="oe_edit_only"/>
+                            <h4>
+                    			<field name="fecha_fin" string="Fecha Finalizacion"/>
+                    		</h4>
+                    		</group>
+                    		<group>
+                    		<label for="dias" class="oe_edit_only"/>
+                            <h4>
+                    			<field name="dias" string="Dias otorgados"/>
+                    		</h4>
+                    		<label for="dia" class="oe_edit_only"/>
+                            <h4>
+                    			<field name="dia" string="Dia"/>
+                    		</h4>
+                    		
+                    		</group>
+                    		</group>
+                    		<label for="cod_diag" class="oe_edit_only"/>
+                            <h4>
+                                <field name="cod_diag" string="Diagnostico"/>
+                            </h4>
+                    		<label for="prorroga" class="oe_edit_only"/>
+                            <h4>
+                    			<field name="prorroga" string="Incial/Prorroga"/>
+                    		</h4>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="hr_incap_list_view" model="ir.ui.view">
+            <field name="name">hr.incap.list</field>
+            <field name="model">hr.incap</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <tree string="Incapacidades">
+                    <field name="numero" string="Numero Incapacidad"/>
+                    <field name="employee_id" string="Empleado"/>
+                    <field name="department_id" string="Departamento"/>
+                    <field name="ori_incap" string="Origen Incapacidad"/>
+                    <field name="fecha_ini" string="Fecha Inicio"/>
+                    <field name="fecha_fin" string="Fecha Finalizacion"/>
+                    <field name="dias" string="Dias otorgados"/>
+                    <field name="dia" string="Dia"/>
+                    <field name="cod_diag" string="Diagnostico"/>
+                    <field name="prorroga" string="Incial/Prorroga"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="hr_incap_tree_view" model="ir.ui.view">
+            <field name="name">hr.incap.tree</field>
+            <field name="model">hr.incap</field>
+            <field name="field_parent">child_id</field>
+            <field name="arch" type="xml">
+                <tree toolbar="True" string="Incapacidades">
+                    <field name="numero" string="Numero Incapacidad"/>
+                    <field name="employee_id" string="Empleado"/>
+                    <field name="department_id" string="Departamento"/>
+                    <field name="ori_incap" string="Origen Incapacidad"/>
+                    <field name="fecha_ini" string="Fecha Inicio"/>
+                    <field name="fecha_fin" string="Fecha Finalizacion"/>
+                    <field name="dias" string="Dias otorgados"/>
+                    <field name="dia" string="Dia"/>
+                    <field name="cod_diag" string="Diagnostico"/>
+                    <field name="prorroga" string="Incial/Prorroga"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="hr_incap_action" model="ir.actions.act_window">
+            <field name="name">Incapacidades</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.incap</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="view_id" ref="hr_incap_tree_view"/>
+            <field name="search_view_id" ref="view_hr_incap_filter"/>
+            <field name="help" type="html">
+              <p>
+                Aqui hay un listado de las incapacidades.
+              </p>
+            </field>
+        </record>
+        
+        <record id="hr_incap_action_form" model="ir.actions.act_window">
+            <field name="name">Incapacidades</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.incap</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="search_view_id" ref="view_hr_incap_filter"/>
+            <field name="view_id" ref="hr_incap_list_view"/>
+        </record>
+        
+        <menuitem id="hr_incap_menu" name="Incapacidades" sequence="20" parent="hr.menu_hr_root"/>
+        <menuitem action="hr_incap_action_form" id="menu_incap_all" name="Ingreso de Incapacidades" parent="hr_incap_menu"/>
+               
+</data>
+</openerp>
